@@ -5,6 +5,7 @@ import LandingPage from './LandingPage';
 import RemoveCustomer from './RemoveCustomer';
 import CancelOrder from './CancelOrder';
 import DeliverOrder from './DeliverOrder';
+import AddDrone from './AddDrone';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/RemoveCustomer" element={<RemoveCustomer />} />
         <Route path="/CancelOrder" element={<CancelOrder />} />
         <Route path="/DeliverOrder" element={<DeliverOrder/>} />
+        <Route path="/AddDrone" element={<AddDrone/>} />
       </Routes>
     </Router>
   );

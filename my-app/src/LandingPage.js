@@ -6,9 +6,10 @@ const LandingPage = () => {
     <div>
       <h1>Welcome to the Landing Page!</h1>
       <div>
-        <Link to="/DeliverOrder"><button>DeliverOrder</button></Link>
-        <Link to="/RemoveCustomer"><button>RemoveCustomer</button></Link>
-        <Link to="/CancelOrder"><button>CancelOrder</button></Link>
+        <Link to="/DeliverOrder"><button>Deliver Order</button></Link>
+        <Link to="/RemoveCustomer"><button>Remove Customer</button></Link>
+        <Link to="/CancelOrder"><button>Cancel Order</button></Link>
+        <Link to="/AddDrone"><button>Add Drone</button></Link>
       </div>
     </div>
   );
