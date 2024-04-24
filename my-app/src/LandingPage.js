@@ -10,6 +10,14 @@ const LandingPage = () => {
         <Link to="/RemoveCustomer"><button>Remove Customer</button></Link>
         <Link to="/CancelOrder"><button>Cancel Order</button></Link>
         <Link to="/AddDrone"><button>Add Drone</button></Link>
+        <Link to="/AddCustomer"><button>Add Customer</button></Link>
+        <Link to="/BeginOrder"><button>Begin Order</button></Link>
+        <Link to="/AddOrderLine"><button>Add Order Line</button></Link>
+        <Link to="/AddDronePilot"><button>Add Drone Pilot</button></Link>
+        <Link to="/AddProduct"><button>Add Product</button></Link>
+        <Link to="/RemoveDronePilot"><button>Remove Drone Pilot</button></Link>
+        <Link to="/RemoveProduct"><button>Remove Product</button></Link>
+        <Link to="/RemoveDrone"><button>Remove Drone</button></Link>
       </div>
     </div>
   );

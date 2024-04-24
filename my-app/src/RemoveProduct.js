@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
-const RemoveCustomer = () => {
-  const [username, setUsername] = useState('');
+const RemoveProduct = () => {
+  const [barcode, setbarcode] = useState('');
   const navigate = useNavigate();
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handlebarcodeChange = (event) => {
+    setbarcode(event.target.value);
   };
 
   const handleCancel = () => {
@@ -18,39 +18,39 @@ const RemoveCustomer = () => {
 
   const handleRemove = () => {
     // Make API request to remove the customer
-    axios.delete('/RemoveCustomer', {
+    axios.delete('/RemoveBarcode', {
       params: {
-        ip_uname: username
+        ip_barcode: barcode
       }
     })
     .then(response => {
-      console.log('Customer removed successfully');
+      console.log('Product removed successfully');
       // Handle success, if needed
     })
     .catch(error => {
-      console.error('Error removing Customer: ', error);
+      console.error('Error removing Product: ', error);
       // Handle error, if needed
     });
   };
 
   return (
     <div>
-      <h2>Remove Customer</h2>
+      <h2>Remove Product</h2>
       <div>
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="barcode">Barcode:</label>
         <input
           type="text"
-          id="username"
-          value={username}
-          onChange={handleUsernameChange}
+          id="barcode"
+          value={barcode}
+          onChange={handlebarcodeChange}
         />
       </div>
       <div>
         <button onClick={handleCancel}>Cancel</button>
-        <button onClick={handleRemove}>Remove Customer</button>
+        <button onClick={handleRemove}>Remove Product</button>
       </div>
     </div>
   );
 };
 
-export default RemoveCustomer;
+export default RemoveProduct;
