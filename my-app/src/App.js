@@ -14,6 +14,16 @@ import AddProduct from './AddProduct';
 import RemoveDronePilot from './RemoveDronePilot';
 import RemoveProduct from './RemoveProduct';
 import RemoveDrone from './RemoveDrone';
+import IncreaseCustomerCredit from './IncreaseCustomerCredit';
+import RepairRefuelDrone from './RepairRefuelDrone';
+import SwapDroneControl from './SwapDroneControl';
+import RoleDistributionTable from './RoleDistributionTable';
+import CustomerCreditCheck from './CustomerCreditCheck';
+import DroneTrafficControl from './DroneTrafficControl';
+import MostPopularProducts from './MostPopularProducts';
+import DronePilotRoster from './DronePilotRoster';
+import StoreSalesOverview from './StoreSalesOverview';
+import OrdersInProgress from './OrdersInProgress';
 
 const App = () => {
   return (
@@ -32,6 +42,16 @@ const App = () => {
         <Route path="/RemoveDronePilot" element={<RemoveDronePilot />} />
         <Route path="/RemoveProduct" element={<RemoveProduct />} />
         <Route path="/RemoveDrone" element={<RemoveDrone />} />
+        <Route path="/IncreaseCustomerCredit" element={<IncreaseCustomerCredit />} />
+        <Route path="/RepairRefuelDrone" element={<RepairRefuelDrone />} />
+        <Route path="/SwapDroneControl" element={<SwapDroneControl />} />
+        <Route path="/RoleDistributionTable" element={<RoleDistributionTable />} />
+        <Route path="/CustomerCreditCheck" element={<CustomerCreditCheck />} />
+        <Route path="/DroneTrafficControl" element={<DroneTrafficControl />} />
+        <Route path="/MostPopularProducts" element={<MostPopularProducts />} />
+        <Route path="/DronePilotRoster" element={<DronePilotRoster />} />
+        <Route path="/StoreSalesOverview" element={<StoreSalesOverview />} />
+        <Route path="/OrdersInProgress" element={<OrdersInProgress />} />
       </Routes>
     </Router>
   );

@@ -4,26 +4,26 @@ import { useNavigate } from 'react-router-dom'
 
 const AddDrone = () => {
   const [storeId, setStoreId] = useState('');
-  const [droneTag, setdroneTag] = useState(0);
-  const [capacity, setcapacity] = useState(0);
-  const [remaining_trips, setremaining_trips] = useState(0);
-  const [pilot, setpilot] = useState('');
+  const [droneTag, setDroneTag] = useState(0);
+  const [capacity, setCapacity] = useState(0);
+  const [remaining_trips, setRemaining_trips] = useState(0);
+  const [pilot, setPilot] = useState('');
   const navigate = useNavigate();
 
   const handleStoreIdChange = (event) => {
     setStoreId(event.target.value);
   };
   const handlecapacityChange = (event) => {
-    setcapacity(event.target.value);
+    setCapacity(event.target.value);
   };
   const handlepilotChange = (event) => {
-    setpilot(event.target.value);
+    setPilot(event.target.value);
   };
   const handledroneTagChange = (event) => {
-    setdroneTag(event.target.value);
+    setDroneTag(event.target.value);
   };
   const handleremaining_tripsChange = (event) => {
-    setremaining_trips(event.target.value);
+    setRemaining_trips(event.target.value);
   };
   const handleCancel = () => {
     // Implement cancel logic here
