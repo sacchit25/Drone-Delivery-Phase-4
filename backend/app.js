@@ -4,7 +4,7 @@ const app = express();
 const connection = mysql.createConnection({
     user: 'root',
     host: 'localhost',
-    password: 'Dyindustrial@03',
+    password: '1234',
     database: 'drone_dispatch'
 });
 
@@ -125,7 +125,9 @@ app.delete('/RemoveCustomer', (req, res) => {
       if (error) {
         console.error('Error calling stored procedure: ', error);
         res.status(500).json({ error: 'Internal server error' });
-      } 
+      } else {
+        console.log("started order", ip_orderID);
+      }
     });
   });
 
@@ -190,15 +192,17 @@ app.delete('/RemoveCustomer', (req, res) => {
     console.log("hi")
   
     // Call stored procedure with parameter
-    connection.query('CALL remove_drone_pliot(?)', [ip_uname], (error, results) => {
+    connection.query('CALL remove_drone_pilot(?)', [ip_uname], (error, results) => {
       if (error) {
         console.error('Error calling stored procedure: ', error);
         res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("successfully removed", ip_uname);
       }
     });
   });
 
-  app.delete('/RemoveProduct', (req, res) => {
+  app.delete('/RemoveBarcode', (req, res) => {
     // Extract parameter from request query
     const ip_barcode = req.query.ip_barcode;
     console.log("hi")
@@ -208,6 +212,8 @@ app.delete('/RemoveCustomer', (req, res) => {
       if (error) {
         console.error('Error calling stored procedure: ', error);
         res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("successfully removed", ip_barcode)
       }
     });
   });
@@ -223,9 +229,156 @@ app.delete('/RemoveCustomer', (req, res) => {
       if (error) {
         console.error('Error calling stored procedure: ', error);
         res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("removed", ip_droneTag)
       }
     });
   });
+
+  app.put('/IncreaseCustomerCredit/:username/:money', (req, res) => {
+    const ip_uname = req.params.username;
+    const ip_money = req.params.money
+    console.log("hi")
+
+    connection.query('CALL increase_customer_credits(?,?)', [ip_uname,ip_money], (error, results) => {
+      if (error) {
+        console.error('Error calling stored procedure: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("successly increased credit", ip_uname)
+      }
+    });
+  });
+
+  app.put('/RepairRefuelDrone/:droneStore/:droneTag/:refueledTrips', (req, res) => {
+    const ip_drone_store = req.params.droneStore;
+    const ip_drone_tag = req.params.droneTag
+    const ip_refueled_trips = req.params.refueledTrips
+    console.log("hi")
+
+    connection.query('CALL repair_refuel_drone(?,?,?)', [ip_drone_store,ip_drone_tag,ip_refueled_trips], (error, results) => {
+      if (error) {
+        console.error('Error calling stored procedure: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("successly refueled drone", ip_drone_tag)
+      }
+    });
+  });
+
+  app.put('/SwapDroneControl/:incomingPilot/:outgoingPilot', (req, res) => {
+    const ip_incoming_pilot = req.params.incomingPilot;
+    const ip_outgoing_pilot = req.params.outgoingPilot
+    console.log("hi")
+
+    connection.query('CALL swap_drone_control(?,?)', [ip_incoming_pilot,ip_outgoing_pilot], (error, results) => {
+      if (error) {
+        console.error('Error calling stored procedure: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("successly swapped drone", ip_incoming_pilot, " and ", ip_outgoing_pilot)
+      }
+    });
+  });
+
+  app.get('/RoleDistributionTable', (req, res) => {
+    connection.query('SELECT * FROM role_distribution', (error, results) => {
+      if (error) {
+        console.error('Error calling view: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("Successfully fetched role_distribution data");
+        console.log(results);
+        // Send role distribution data back in the response
+        res.json(results);
+      }
+    });
+  });
+
+  app.get('/CustomerCreditCheck', (req, res) => {
+    connection.query('SELECT * FROM customer_credit_check', (error, results) => {
+      if (error) {
+        console.error('Error calling view: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("Successfully fetched customer_credit_check data");
+        console.log(results);
+        // Send role distribution data back in the response
+        res.json(results);
+      }
+    });
+  });
+  
+  app.get('/DroneTrafficControl', (req, res) => {
+    connection.query('SELECT * FROM drone_traffic_control', (error, results) => {
+      if (error) {
+        console.error('Error calling view: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("Successfully fetched drone_traffic_control data");
+        console.log(results);
+        // Send role distribution data back in the response
+        res.json(results);
+      }
+    });
+  });
+
+  app.get('/MostPopularProducts', (req, res) => {
+    connection.query('SELECT * FROM most_popular_products', (error, results) => {
+      if (error) {
+        console.error('Error calling view: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("Successfully fetched most_popular_products data");
+        console.log(results);
+        // Send role distribution data back in the response
+        res.json(results);
+      }
+    });
+  });
+
+  app.get('/DronePilotRoster', (req, res) => {
+    connection.query('SELECT * FROM drone_pilot_roster', (error, results) => {
+      if (error) {
+        console.error('Error calling view: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("Successfully fetched drone_pilot_roster data");
+        console.log(results);
+        // Send role distribution data back in the response
+        res.json(results);
+      }
+    });
+  });
+
+  app.get('/StoreSalesOverview', (req, res) => {
+    connection.query('SELECT * FROM store_sales_overview', (error, results) => {
+      if (error) {
+        console.error('Error calling view: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("Successfully fetched store_sales_overview data");
+        console.log(results);
+        // Send role distribution data back in the response
+        res.json(results);
+      }
+    });
+  });
+
+  app.get('/OrdersInProgress', (req, res) => {
+    connection.query('SELECT * FROM orders_in_progress', (error, results) => {
+      if (error) {
+        console.error('Error calling view: ', error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        console.log("Successfully fetched orders_in_progress data");
+        console.log(results);
+        // Send role distribution data back in the response
+        res.json(results);
+      }
+    });
+  });
+
 
   app.listen(3000, () => {
     console.log('Server is running on port 3000');
